@@ -19,6 +19,10 @@ interface CitySearchProps {
   onCitySelect: (city: string) => void
 }
 
+interface CityData {
+  name: string
+}
+
 const CitySearch: React.FC<CitySearchProps> = ({ onCitySelect }) => {
   const [query, setQuery] = useState('')
   const [suggestions, setSuggestions] = useState<string[]>([])
@@ -36,7 +40,7 @@ const CitySearch: React.FC<CitySearchProps> = ({ onCitySelect }) => {
             },
           },
         )
-        setSuggestions(response.data.data.map((city: any) => city.name))
+        setSuggestions(response.data.data.map((city: CityData) => city.name))
       } catch (error) {
         console.error('Error fetching cities:', error)
       }
