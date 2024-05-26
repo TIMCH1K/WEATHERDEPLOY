@@ -27,10 +27,20 @@ interface WeatherDisplayProps {
   city: string
 }
 
-const cache: { [key: string]: any } = {}
+interface WeatherData {
+  name: string
+  main: {
+    temp: number
+  }
+  weather: {
+    description: string
+  }[]
+}
+
+const cache: { [key: string]: WeatherData } = {}
 
 const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city }) => {
-  const [weather, setWeather] = useState<any>(null)
+  const [weather, setWeather] = useState<WeatherData | null>(null)
 
   useEffect(() => {
     const fetchWeather = async () => {
